@@ -2,19 +2,19 @@ package algorithms;
 
 public class BinarySearch {
 
-    public static Integer run(int[] array, int element) {
+    public static Integer run(int[] sortedArray, int item) {
         int low = 0;
-        int high = array.length - 1;
+        int high = sortedArray.length - 1;
 
         while (low <= high) {
             int mid = (low + high) / 2;
-            int guess = array[mid];
+            int guess = sortedArray[mid];
 
-            if (guess == element) {
+            if (guess == item) {
                 return mid;
             }
 
-            if (guess > element) {
+            if (guess > item) {
                 high = mid - 1;
             } else {
                 low = mid + 1;
