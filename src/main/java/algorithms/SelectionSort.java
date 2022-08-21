@@ -2,6 +2,9 @@ package algorithms;
 
 public class SelectionSort {
 
+    private SelectionSort() {
+    }
+
     public static void run(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             int minElemIndex = i;

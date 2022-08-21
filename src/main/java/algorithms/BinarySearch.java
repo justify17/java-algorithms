@@ -2,6 +2,9 @@ package algorithms;
 
 public class BinarySearch {
 
+    private BinarySearch() {
+    }
+
     public static Integer run(int[] sortedArray, int item) {
         int low = 0;
         int high = sortedArray.length - 1;
