@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.math.BigDecimal;
+
 public class QuickSort {
 
     private QuickSort() {
