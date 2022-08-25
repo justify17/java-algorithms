@@ -12,15 +12,9 @@ public class DijkstraShortestPath {
     public static List<Node> run(Node start) {
         Map<Node, Integer> costs = new HashMap<>();
         Map<Node, Node> parents = new HashMap<>();
+        init(start, costs, parents);
+
         List<Node> processed = new ArrayList<>();
-
-        for (Map.Entry<Node, Integer> entry : start.getAdjacentNodes().entrySet()) {
-            Node node = entry.getKey();
-            Integer cost = entry.getValue();
-
-            costs.put(node, cost);
-            parents.put(node, start);
-        }
 
         Node node = findLowestCostNode(costs, processed);
 
@@ -44,18 +38,22 @@ public class DijkstraShortestPath {
             node = findLowestCostNode(costs, processed);
         }
 
-        ArrayList<Node> result = new ArrayList<>();
+        Node end = processed.stream()
+                .filter(processedNode -> processedNode.getAdjacentNodes().isEmpty())
+                .findFirst()
+                .orElse(new Node("End"));
 
-        Node end = new Node("End");
+        return getShortestPath(parents, end);
+    }
 
-        while (end != null) {
-            result.add(end);
-            end = parents.get(end);
+    private static void init(Node start, Map<Node, Integer> costs, Map<Node, Node> parents) {
+        for (Map.Entry<Node, Integer> entry : start.getAdjacentNodes().entrySet()) {
+            Node node = entry.getKey();
+            Integer cost = entry.getValue();
+
+            costs.put(node, cost);
+            parents.put(node, start);
         }
-
-        Collections.reverse(result);
-
-        return result;
     }
 
     private static Node findLowestCostNode(Map<Node, Integer> costs, List<Node> processed) {
@@ -77,5 +75,18 @@ public class DijkstraShortestPath {
         }
 
         return minNode;
+    }
+
+    private static List<Node> getShortestPath(Map<Node, Node> parents, Node end) {
+        ArrayList<Node> result = new ArrayList<>();
+
+        while (end != null) {
+            result.add(end);
+            end = parents.get(end);
+        }
+
+        Collections.reverse(result);
+
+        return result;
     }
 }

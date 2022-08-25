@@ -1,10 +1,11 @@
 package algorithms;
 
 import algorithms.helperClasses.dijkstraShortestPath.Node;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DijkstraShortestPathTest {
 
@@ -25,6 +26,6 @@ class DijkstraShortestPathTest {
         b.addNode(a, 3);
         b.addNode(end, 5);
 
-        Assertions.assertEquals(List.of(start, b, a, end), DijkstraShortestPath.run(start));
+        assertEquals(List.of(start, b, a, end), DijkstraShortestPath.run(start));
     }
 }
